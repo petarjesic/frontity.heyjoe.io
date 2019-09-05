@@ -1,0 +1,10 @@
+{
+  "alias": "www.heyjoe-frontity.com",
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@frontity/now"
+    }
+  ]
+}

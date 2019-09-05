@@ -1,0 +1,79 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "4.39.3",
+  "hash": "295a037185f91a351010",
+  "publicPath": "/static/",
+  "outputPath": "F:\\Projects\\Frontity\\frontity.heyjoe.io\\build\\static",
+  "assetsByChunkName": {
+    "heyjoe.io": "heyjoe.io.module.js",
+    "list": "list.module.js"
+  },
+  "assets": [
+    {
+      "name": "heyjoe.io.module.js",
+      "size": 5152057,
+      "chunks": [
+        "heyjoe.io"
+      ],
+      "chunkNames": [
+        "heyjoe.io"
+      ],
+      "emitted": false
+    },
+    {
+      "name": "list.module.js",
+      "size": 17979,
+      "chunks": [
+        "list"
+      ],
+      "chunkNames": [
+        "list"
+      ],
+      "emitted": false
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "heyjoe.io": {
+      "chunks": [
+        "heyjoe.io"
+      ],
+      "assets": [
+        "heyjoe.io.module.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "heyjoe.io": {
+      "chunks": [
+        "heyjoe.io"
+      ],
+      "assets": [
+        "heyjoe.io.module.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "list": {
+      "chunks": [
+        "list"
+      ],
+      "assets": [
+        "list.module.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 5,
+      "debug": false
+    }
+  },
+  "children": []
+}
