@@ -42,6 +42,7 @@ const marsTheme = {
       isOpen: false,
       isListView: false,
       isActive: false,
+      selectedCategory: 'All',
       featured: {
         showOnList: false,
         showOnPost: false

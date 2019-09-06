@@ -21,6 +21,13 @@ const Project = ({ state, libraries }) => {
       post['wpcf-size-card-ratings'] = JSON.parse(post['wpcf-size-card-ratings']);
   }
 
+  let getUniqueCategories = [];
+  for (var key in post['wpcf-size-card-ratings']) {
+    if (getUniqueCategories.findIndex(e => e === post['wpcf-size-card-ratings'][key]) === -1) {
+      getUniqueCategories.push(post['wpcf-size-card-ratings'][key]);
+    }
+  }
+
   const ratings = post['wpcf-size-card-ratings'];
   const photoIndex = state.theme.photoIndex;
   const isOpen = state.theme.photoIndex;
@@ -32,15 +39,7 @@ const Project = ({ state, libraries }) => {
   }
 
   const selectCategory = (element) => {
-    var categoryName = element.toLowerCase();
-    var displayedCategories = PHOTODATA.filter(function (el) {
-      var searchValue = el.category.toLowerCase();
-      return searchValue.indexOf(categoryName) !== -1;
-    });
-
-    this.setState({
-      displayedCategories: displayedCategories
-    });
+    state.theme.selectedCategory = element;
   }
 
   const resetFilter = (element) => {
@@ -104,6 +103,16 @@ const Project = ({ state, libraries }) => {
     <>
       <div className="pb-5 pt-5 bg-light">
         <div className="container">
+          <TextCenter>
+            <div className="btn-group" role="group">
+              <button type="button" className={state.theme.selectedCategory == 'All' ? 'btn btn-primary' : 'btn btn-secondary'} onClick={selectCategory.bind(null, 'All')}> All </button>
+            </div>
+            {
+              getUniqueCategories.map(function (el, i) {
+                return <button type="button"  className={state.theme.selectedCategory == el ? 'btn btn-primary' : 'btn btn-secondary'} onClick={selectCategory.bind(null, el)} category={el} key={i}>{el}</button>
+              })
+            }
+          </TextCenter>
           <TextRight>
             <div>
               <div className="custom-control custom-switch mb-4">
@@ -116,14 +125,20 @@ const Project = ({ state, libraries }) => {
           <div className="row">
             {
               !state.theme.isListView && post['wpcf-size-cards'].map(function (el, i) {
-                return <PhotoGridItem key={i} index={i} imageUrl={el} category={'category'} title={'title'} description={'description'} rating={ratings[i]}
-                  onClick={openLightBox.bind(null, i)} onRateClick={ratePhotoByIndex} />
+                if (post['wpcf-size-card-ratings'][i] == state.theme.selectedCategory || state.theme.selectedCategory === 'All')
+                  return <PhotoGridItem key={i} index={i} imageUrl={el} category={'category'} title={'title'} description={'description'} rating={ratings[i]}
+                    onClick={openLightBox.bind(null, i)} onRateClick={ratePhotoByIndex} />
+
+                return null
               })
             }
             {
               state.theme.isListView && post['wpcf-size-cards'].map(function (el, i) {
-                return <PhotoListItem key={i} index={i} imageUrl={el} category={'category'} title={'title'} description={'description'} rating={ratings[i]}
-                  onClick={openLightBox.bind(null, i)} onRateClick={ratePhotoByIndex} />
+                if (post['wpcf-size-card-ratings'][i] == state.theme.selectedCategory || state.theme.selectedCategory === 'All')
+                  return <PhotoListItem key={i} index={i} imageUrl={el} category={'category'} title={'title'} description={'description'} rating={ratings[i]}
+                    onClick={openLightBox.bind(null, i)} onRateClick={ratePhotoByIndex} />
+
+                return null
               })
             }
           </div>
@@ -155,6 +170,10 @@ const Container = styled.div`
 
 const TextRight = styled.div`
   text-align: right;
+`;
+
+const TextCenter = styled.div`
+  text-align: center;
 `;
 
 const Body = styled.div`
